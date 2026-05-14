@@ -1,6 +1,6 @@
 # TVP-VAR 时变参数向量自回归分析框架
 
-一个基于贝叶斯方法的时变参数向量自回归（Time-Varying Parameter Vector Autoregression）分析工具，用于多维财务数据的动态因果分析、脉冲响应和预测。
+一个基于贝叶斯方法的时变参数向量自回归（Time-Varying Parameter Vector Autoregression）分析工具，用于多维财务数据的动态因果分析、脉冲响应和预测。本人新人小白，关于这个模型，我希望大佬们能给些建议。
 
 ## 项目结构
 
