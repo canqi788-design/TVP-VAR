@@ -1,0 +1,46 @@
+{
+    "data_source": "五粮液季度数据.csv",
+    "inference_control": {
+        "n_iter": 3000,
+        "burnin": 1000,
+        "thin": 2
+    },
+    "stochastic_volatility": {
+        "enabled": true,
+        "sv_n_iter": 500,
+        "sv_burnin": 200
+    },
+    "stationarity": {
+        "test": "adf",
+        "max_d": 1,
+        "significance": 0.05,
+        "log_transform": true
+    },
+    "forecasting": {
+        "steps": 4,
+        "n_samples": 500
+    },
+    "structural_analysis": {
+        "irf_periods": 6
+    },
+    "convergence_diagnostics": {
+        "rhat_threshold": 1.1,
+        "ess_minimum": 100
+    },
+    "models": {
+        "model_a": {
+            "name": "盈利驱动模型 (Profitability)",
+            "vars": ["revenue", "op_profit", "cost"],
+            "keywords": ["利润", "盈利", "收入", "成本", "毛利", "营业利润",
+                         "profit", "revenue", "margin", "cost", "earnings",
+                         "利润率", "净利", "增收", "降本", "费用"]
+        },
+        "model_b": {
+            "name": "投资驱动模型 (Investment)",
+            "vars": ["revenue", "capex", "rd_expense"],
+            "keywords": ["投资", "资本", "研发", "产能", "扩张", "建设",
+                         "capex", "investment", "rd", "research", "capacity",
+                         "固定资产", "设备", "扩产", "研发费用", "资本开支"]
+        }
+    }
+}

@@ -1,0 +1,69 @@
+{
+  "version": "4.0.0",
+  "nodes": {
+    "data": {
+      "type": "source",
+      "outputs": ["Y"]
+    },
+
+    "stationarity": {
+      "type": "transform",
+      "kernel": "stationarity",
+      "inputs": ["Y"],
+      "outputs": ["Y_diff", "d_orders"]
+    },
+
+    "state_update": {
+      "type": "compute",
+      "kernel": "state_transition",
+      "inputs": ["Y_diff"],
+      "outputs": ["theta_t"]
+    },
+
+    "likelihood": {
+      "type": "compute",
+      "kernel": "likelihood",
+      "inputs": ["theta_t"],
+      "outputs": ["log_lik"]
+    },
+
+    "sampling_basic": {
+      "type": "compute",
+      "kernel": "sampling_basic",
+      "inputs": ["theta_t", "log_lik"],
+      "outputs": ["_joint_chain"]
+    },
+
+    "sampling_research": {
+      "type": "compute",
+      "kernel": "sampling_research",
+      "inputs": ["theta_t", "log_lik"],
+      "outputs": ["_joint_chain"]
+    },
+
+    "diagnostics": {
+      "type": "compute",
+      "kernel": "diagnostics",
+      "inputs": ["_joint_chain"],
+      "outputs": ["metrics"]
+    },
+
+    "reporting": {
+      "type": "sink",
+      "kernel": "reporting",
+      "inputs": ["_joint_chain", "metrics"],
+      "outputs": ["report", "csv"]
+    }
+  },
+
+  "edges": [
+    {"from": "data", "to": "stationarity"},
+    {"from": "stationarity", "to": "state_update"},
+    {"from": "state_update", "to": "likelihood"},
+    {"from": "likelihood", "to": "sampling_basic"},
+    {"from": "likelihood", "to": "sampling_research"},
+    {"from": "sampling_basic", "to": "diagnostics"},
+    {"from": "sampling_research", "to": "diagnostics"},
+    {"from": "diagnostics", "to": "reporting"}
+  ]
+}
