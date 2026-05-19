@@ -206,4 +206,4 @@ data → stationarity → state_update → likelihood → sampling_basic → sam
 - 平稳性检验的 `test` 参数建议用 `"adf"` 而非 `"both"`，`max_d` 建议设为 1，避免过度差分
 - 模型有效性门禁会标记未通过平稳性检验的输出为"不建议用于业务结论"
 - 时变参数（theta_traj）可通过 `analyst.history` 获取每一步的时变 A 矩阵
-- ADF + KPSS在对波动性较大的行业时必须改为：原配置 + ADF 单独判定 + max_d=1
+- ADF + KPSS在对波动性较大的行业时需改为：原配置 + ADF 单独判定 + max_d=1
