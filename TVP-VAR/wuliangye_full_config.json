@@ -1,0 +1,105 @@
+{
+  "data_source": "/Users/qican/Desktop/VAR大家族/高纬VAR/TVP-VAR/wuliangye_full_quarterly.csv",
+  "mode": "bayesian",
+  "flow_transform": "ytd_to_quarter",
+  "seasonal_transform": "none",
+  "bayesian_priors": {
+    "q_grid": [
+      1e-10,
+      1e-09,
+      1e-08,
+      1e-07,
+      1e-06
+    ]
+  },
+  "inference_control": {
+    "n_iter": 2000,
+    "burnin": 500,
+    "thin": 1
+  },
+  "stochastic_volatility": {
+    "enabled": true,
+    "sv_n_iter": 300,
+    "sv_burnin": 100
+  },
+  "stationarity": {
+    "test": "both",
+    "max_d": 2,
+    "significance": 0.05
+  },
+  "forecasting": {
+    "steps": 4,
+    "n_samples": 500
+  },
+  "structural_analysis": {
+    "irf_periods": 6,
+    "change_point_threshold": 1.5
+  },
+  "stability_guard": {
+    "enforce": true,
+    "spectral_radius_threshold": 0.98
+  },
+  "convergence_diagnostics": {
+    "rhat_threshold": 1.1,
+    "ess_minimum": 100
+  },
+  "models": {
+    "profitability_driver": {
+      "name": "盈利驱动模型 (Profitability Driver)",
+      "vars": [
+        "毛利率",
+        "销售费用率",
+        "管理费用率",
+        "净利率"
+      ],
+      "exog_vars": [
+        "营业总收入_亿元"
+      ],
+      "forecast_bounds": {
+        "indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "lower": 0.0,
+        "upper": 1.0
+      },
+      "keywords": [
+        "盈利",
+        "利润",
+        "毛利",
+        "毛利率",
+        "净利率",
+        "费用率",
+        "销售费用率",
+        "管理费用率",
+        "profit",
+        "margin"
+      ]
+    },
+    "scale_driver": {
+      "name": "规模驱动模型 (Scale Driver)",
+      "vars": [
+        "营业总收入_亿元",
+        "营业成本_亿元",
+        "销售费用_亿元",
+        "管理费用_亿元",
+        "净利润_亿元"
+      ],
+      "keywords": [
+        "规模",
+        "收入",
+        "营收",
+        "成本",
+        "费用",
+        "净利润",
+        "增长",
+        "volume",
+        "scale",
+        "revenue",
+        "cost"
+      ]
+    }
+  }
+}
